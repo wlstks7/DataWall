@@ -35,13 +35,13 @@
 						{
 							"bullet": "round",
 							"id": "AmGraph-1",
-							"title": "graph 1",
+							"title": "Unauthorized Immigrant Population",
 							"valueField": "column-1"
 						},
 						{
 							"bullet": "square",
 							"id": "AmGraph-2",
-							"title": "graph 2",
+							"title": "Legal Permanent Residence",
 							"valueField": "column-2"
 						}
 					],
@@ -49,7 +49,7 @@
 					"valueAxes": [
 						{
 							"id": "ValueAxis-1",
-							"title": "Axis title"
+							"title": "Population"
 						}
 					],
 					"allLabels": [],
@@ -68,48 +68,48 @@
 					"dataProvider": [
 						{
 							"date": "2005",
-							"column-1": 8,
-							"column-2": 5
+							"column-1": 2770000,
+							"column-2": 3430000
 						},
 						{
 							"date": "2006",
-							"column-1": 6,
-							"column-2": 7
+							"column-1": 2790000,
+							"column-2": 3430000
 						},
 						{
 							"date": "2007",
-							"column-1": 2,
-							"column-2": 3
+							"column-1": 2840000,
+							"column-2": 3540000
 						},
 						{
 							"date": "2008",
-							"column-1": 4,
-							"column-2": 3
+							"column-1": 2850000,
+							"column-2": 3440000
 						},
 						{
 							"date": "2009",
-							"column-1": 2,
-							"column-2": 1
+							"column-1": 2600000,
+							"column-2": 3310000
 						},
 						{
 							"date": "2010",
-							"column-1": 3,
-							"column-2": 2
+							"column-1": 2570000,
+							"column-2": 3330000
 						},
 						{
-							"date": "2010",
-							"column-1": 4,
-							"column-2": 8
+							"date": "2010", //Census
+							"column-1": 2910000,
+							"column-2": 3330000
 						},
 						{
 							"date": "2011",
-							"column-1": "5",
-							"column-2": "9"
+							"column-1": 2830000,
+							"column-2": 3380000
 						},
 						{
 							"date": "2012",
-							"column-1": "6",
-							"column-2": "4"
+							"column-1": 2820000,
+							"column-2": 3400000
 						}
 					]
 				}
@@ -120,40 +120,47 @@
 		<!-- amCharts javascript sources -->
 		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
 		<!-- amCharts javascript code -->
 		<script type="text/javascript">
 			AmCharts.makeChart("chartdiv2",
 				{
 					"type": "serial",
-					"categoryField": "category",
-					"startDuration": 1,
+					"categoryField": "date",
+					"dataDateFormat": "YYYY",
+					"theme": "patterns",
 					"categoryAxis": {
-						"gridPosition": "start"
+						"minPeriod": "YYYY",
+						"parseDates": true
+					},
+					"chartCursor": {
+						"enabled": true,
+						"animationDuration": 0,
+						"categoryBalloonDateFormat": "YYYY"
+					},
+					"chartScrollbar": {
+						"enabled": true
 					},
 					"trendLines": [],
 					"graphs": [
 						{
-							"balloonText": "[[title]] of [[category]]:[[value]]",
 							"bullet": "round",
 							"id": "AmGraph-1",
-							"title": "graph 1",
-							"type": "smoothedLine",
-							"valueField": "column-1"
+							"title": "Unauthorized Immigrants",
+							"valueField": "column-1a"
 						},
 						{
-							"balloonText": "[[title]] of [[category]]:[[value]]",
 							"bullet": "square",
 							"id": "AmGraph-2",
-							"title": "graph 2",
-							"type": "smoothedLine",
-							"valueField": "column-2"
+							"title": "Legal Residences",
+							"valueField": "column-2a"
 						}
 					],
 					"guides": [],
 					"valueAxes": [
 						{
 							"id": "ValueAxis-1",
-							"title": "Axis title"
+							"title": "Population From Mexico"
 						}
 					],
 					"allLabels": [],
@@ -165,32 +172,49 @@
 					"titles": [],
 					"dataProvider": [
 						{
-							"category": "category 1",
-							"column-1": 8
+							"date": "2005",
+							"column-1a": 1576444,
+							"column-2a": 936730
 						},
 						{
-							"category": "category 2",
-							"column-1": 6
+							"date": "2006",
+							"column-1a": 1620716,
+							"column-2a": 936730
 						},
 						{
-							"category": "category 3",
-							"column-1": 2
+							"date": "2007",
+							"column-1a": 1682784,
+							"column-2a": 943840
 						},
 						{
-							"category": "category 4",
-							"column-1": 1
+							"date": "2008",
+							"column-1a": 1727198,
+							"column-2a": 925470
 						},
 						{
-							"category": "category 5",
-							"column-1": 2
+							"date": "2009",
+							"column-1a": 1608372,
+							"column-2a": 872480
 						},
 						{
-							"category": "category 6",
-							"column-1": 3
+							"date": "2010",
+							"column-1a": 1581538,
+							"column-2a": 865270
 						},
 						{
-							"category": "category 7",
-							"column-1": 6
+							"date": "2010", //Census
+							"column-1a": 1714866,
+							"column-2a": 865270
+						},
+						{
+							"date": "2011",
+							"column-1a": 1671698,
+							"column-2a": 859880
+						},
+						{
+							"date": "2012",
+							"column-1a": 1657952,
+							"column-2a": 852480
 						}
 					]
 				}
@@ -201,40 +225,47 @@
 		<!-- amCharts javascript sources -->
 		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
 		<!-- amCharts javascript code -->
 		<script type="text/javascript">
 			AmCharts.makeChart("chartdiv3",
 				{
 					"type": "serial",
-					"categoryField": "category",
-					"startDuration": 1,
+					"categoryField": "date",
+					"dataDateFormat": "YYYY",
+					"theme": "patterns",
 					"categoryAxis": {
-						"gridPosition": "start"
+						"minPeriod": "YYYY",
+						"parseDates": true
+					},
+					"chartCursor": {
+						"enabled": true,
+						"animationDuration": 0,
+						"categoryBalloonDateFormat": "YYYY"
+					},
+					"chartScrollbar": {
+						"enabled": true
 					},
 					"trendLines": [],
 					"graphs": [
 						{
-							"balloonText": "[[title]] of [[category]]:[[value]]",
 							"bullet": "round",
 							"id": "AmGraph-1",
-							"title": "graph 1",
-							"type": "smoothedLine",
-							"valueField": "column-1"
+							"title": "Unauthorized Immigrants",
+							"valueField": "column-1a"
 						},
 						{
-							"balloonText": "[[title]] of [[category]]:[[value]]",
 							"bullet": "square",
 							"id": "AmGraph-2",
-							"title": "graph 2",
-							"type": "smoothedLine",
-							"valueField": "column-2"
+							"title": "Legal Residences",
+							"valueField": "column-2a"
 						}
 					],
 					"guides": [],
 					"valueAxes": [
 						{
 							"id": "ValueAxis-1",
-							"title": "Axis title"
+							"title": "Popularity Versus All States"
 						}
 					],
 					"allLabels": [],
@@ -246,32 +277,49 @@
 					"titles": [],
 					"dataProvider": [
 						{
-							"category": "category 1",
-							"column-1": 8
+							"date": "2005",
+							"column-1a": 26.4,
+							"column-2a": 28.3
 						},
 						{
-							"category": "category 2",
-							"column-1": 6
+							"date": "2006",
+							"column-1a": 24.7,
+							"column-2a": 28.3
 						},
 						{
-							"category": "category 3",
-							"column-1": 2
+							"date": "2007",
+							"column-1a": 24.1,
+							"column-2a": 27.7
 						},
 						{
-							"category": "category 4",
-							"column-1": 1
+							"date": "2008",
+							"column-1a": 24.6,
+							"column-2a": 27.3
 						},
 						{
-							"category": "category 5",
-							"column-1": 2
+							"date": "2009",
+							"column-1a": 24.2,
+							"column-2a": 26.6
 						},
 						{
-							"category": "category 6",
-							"column-1": 3
+							"date": "2010",
+							"column-1a": 23.8,
+							"column-2a": 26.3
 						},
 						{
-							"category": "category 7",
-							"column-1": 6
+							"date": "2010", //Census
+							"column-1a": 25.1,
+							"column-2a": 26.3
+						},
+						{
+							"date": "2011",
+							"column-1a": 24.6,
+							"column-2a": 25.9
+						},
+						{
+							"date": "2012",
+							"column-1a": 25,
+							"column-2a": 25.6
 						}
 					]
 				}
