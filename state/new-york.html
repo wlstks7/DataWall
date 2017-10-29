@@ -1,0 +1,394 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf8" />
+		<title>New York | DataWall</title>
+		<link rel="stylesheet" type="text/css" href="../main.css"/>
+
+		<!-- Chart 1 -->
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"categoryField": "date",
+					"dataDateFormat": "YYYY",
+					"theme": "patterns",
+					"categoryAxis": {
+						"minPeriod": "YYYY",
+						"parseDates": true
+					},
+					"chartCursor": {
+						"enabled": true,
+						"animationDuration": 0,
+						"categoryBalloonDateFormat": "YYYY"
+					},
+					"chartScrollbar": {
+						"enabled": true
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"bullet": "round",
+							"id": "AmGraph-1",
+							"title": "Unauthorized Immigrant Population",
+							"valueField": "column-1"
+						},
+						{
+							"bullet": "square",
+							"id": "AmGraph-2",
+							"title": "Legal Permanent Residence",
+							"valueField": "column-2"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "Population"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"useGraphSettings": true
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 1,
+							"text": ""
+						}
+					],
+					"dataProvider": [
+						{
+							"date": "2005",
+							"column-1": 560000,
+							"column-2": 1490000
+						},
+						{
+							"date": "2006",
+							"column-1": 510000,
+							"column-2": 1490000
+						},
+						{
+							"date": "2007",
+							"column-1": 640000,
+							"column-2": 1560000
+						},
+						{
+							"date": "2008",
+							"column-1": 640000,
+							"column-2": 1530000
+						},
+						{
+							"date": "2009",
+							"column-1": 550000,
+							"column-2": 1530000
+						},
+						{
+							"date": "2010",
+							"column-1": 460000,
+							"column-2": 1560000
+						},
+						{
+							"date": "2010", //Census
+							"column-1": 690000,
+							"column-2": 1560000
+						},
+						{
+							"date": "2011",
+							"column-1": 630000,
+							"column-2": 1620000
+						},
+						{
+							"date": "2012",
+							"column-1": 580000,
+							"column-2": 1660000
+						}
+					]
+				}
+			);
+		</script>
+
+		<!-- Chart 2 -->
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv2",
+				{
+					"type": "serial",
+					"categoryField": "date",
+					"dataDateFormat": "YYYY",
+					"theme": "patterns",
+					"categoryAxis": {
+						"minPeriod": "YYYY",
+						"parseDates": true
+					},
+					"chartCursor": {
+						"enabled": true,
+						"animationDuration": 0,
+						"categoryBalloonDateFormat": "YYYY"
+					},
+					"chartScrollbar": {
+						"enabled": true
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"bullet": "round",
+							"id": "AmGraph-1",
+							"title": "Unauthorized Immigrants",
+							"valueField": "column-1a"
+						},
+						{
+							"bullet": "square",
+							"id": "AmGraph-2",
+							"title": "Legal Residences",
+							"valueField": "column-2a"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "Population From Mexico"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"useGraphSettings": true
+					},
+					"titles": [],
+					"dataProvider": [
+						{
+							"date": "2005",
+							"column-1a": 318703,
+							"column-2a": 407130
+						},
+						{
+							"date": "2006",
+							"column-1a": 296259,
+							"column-2a": 407130
+						},
+						{
+							"date": "2007",
+							"column-1a": 379219,
+							"column-2a": 423340
+						},
+						{
+							"date": "2008",
+							"column-1a": 387862,
+							"column-2a": 410190
+						},
+						{
+							"date": "2009",
+							"column-1a": 340232,
+							"column-2a": 403440
+						},
+						{
+							"date": "2010",
+							"column-1a": 283076,
+							"column-2a": 407960
+						},
+						{
+							"date": "2010", //Census
+							"column-1a": 406617,
+							"column-2a": 407960
+						},
+						{
+							"date": "2011",
+							"column-1a": 372144,
+							"column-2a": 411680
+						},
+						{
+							"date": "2012",
+							"column-1a": 340997,
+							"column-2a": 416250
+						}
+					]
+				}
+			);
+		</script>
+
+		<!-- Chart 3 -->
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv3",
+				{
+					"type": "serial",
+					"categoryField": "date",
+					"dataDateFormat": "YYYY",
+					"theme": "patterns",
+					"categoryAxis": {
+						"minPeriod": "YYYY",
+						"parseDates": true
+					},
+					"chartCursor": {
+						"enabled": true,
+						"animationDuration": 0,
+						"categoryBalloonDateFormat": "YYYY"
+					},
+					"chartScrollbar": {
+						"enabled": true
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"bullet": "round",
+							"id": "AmGraph-1",
+							"title": "Unauthorized Immigrants",
+							"valueField": "column-1a"
+						},
+						{
+							"bullet": "square",
+							"id": "AmGraph-2",
+							"title": "Legal Residences",
+							"valueField": "column-2a"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "Popularity Versus All States"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"useGraphSettings": true
+					},
+					"titles": [],
+					"dataProvider": [
+						{
+							"date": "2005",
+							"column-1a": 5.3,
+							"column-2a": 12.3
+						},
+						{
+							"date": "2006",
+							"column-1a": 4.5,
+							"column-2a": 12.3
+						},
+						{
+							"date": "2007",
+							"column-1a": 5.4,
+							"column-2a": 12.2
+						},
+						{
+							"date": "2008",
+							"column-1a": 5.5,
+							"column-2a": 12.1
+						},
+						{
+							"date": "2009",
+							"column-1a": 5.1,
+							"column-2a": 12.3
+						},
+						{
+							"date": "2010",
+							"column-1a": 4.3,
+							"column-2a": 12.4
+						},
+						{
+							"date": "2010", //Census
+							"column-1a": 6,
+							"column-2a": 12.4
+						},
+						{
+							"date": "2011",
+							"column-1a": 5.5,
+							"column-2a": 12.4
+						},
+						{
+							"date": "2012",
+							"column-1a": 5.1,
+							"column-2a": 12.5
+						}
+					]
+				}
+			);
+		</script>
+
+	</head>
+	<body class="container">
+		<div class="dataWall-banner-image">
+			<img src="../image/DataWall-logo-black.png">
+		</div>
+		<div class="navigation-links">
+			<a href="../index.html">DataWall</a>
+			<a href="../datamap.html">DataMap</a>
+			<a href="../resources.html">Resources</a>
+			<a href="../state/arizona.html">Arizona</a>
+			<a href="../state/california.html">California</a>
+			<a href="../state/florida.html">Florida</a>
+			<a href="../state/georgia.html">Georgia</a>
+			<a href="../state/illinois.html">Illinois</a>
+			<a href="../state/new-jersey.html">New Jersey</a>
+			<a href="../state/new-york.html">New York</a>
+			<a href="../state/north-carolina.html">North Carolina</a>
+			<a href="../state/texas.html">Texas</a>
+			<a href="../state/washington.html">Washington</a>
+		</div>
+		<div class="state-page-header">
+			<h1>
+				New York
+			</h1>
+		</div>
+		<div class="line-graph-100">
+			<h2>
+				New York's Immigration
+			</h2>
+			<div id="chartdiv"></div>
+			<h3>
+				Legal and Illegal Residence
+			</h3>
+			<h3>
+				2005 - 2012 | <a href="">Source</a>
+			</h3>
+			<p>
+				This chart shows unauthorized immigration and legal permanent resident population from all countries outside of the United States.
+			</p>
+		</div>
+		<div class="line-graph-50">
+			<h2>
+				Immigration From Mexico
+			</h2>
+			<div id="chartdiv2"></div>
+			<h3>
+				Unauthorized immigration and legal permanent residents from Mexico by the nominal count.
+			</h3>
+			<p>
+				There seems to be a lot of complication and extra markup being proposed when simple padding would do. OP doesn't explain his/her requirements why simple padding is inadequate. If it is desired to always have space before and after the test, then I don't see how width is increasing. If the extra space is only desired under some circumstances, those circumstances are not explained. Usually the simple solution is best. - <a href="">Jalynn2</a>.
+			</p>
+		</div>
+		<div class="line-graph-50">
+			<h2>
+				New York's Immigration Popularity
+			</h2>
+			<div id="chartdiv3"></div>
+			<h3>
+				Percentage of unauthorized immigration and legal permanent residents from Mexico into New York versus the other states.
+			</h3>
+			<p>
+				There seems to be a lot of complication and extra markup being proposed when simple padding would do. OP doesn't explain his/her requirements why simple padding is inadequate. If it is desired to always have space before and after the test, then I don't see how width is increasing. If the extra space is only desired under some circumstances, those circumstances are not explained. Usually the simple solution is best. - <a href="">Jalynn2</a>.
+			</p>
+		</div>
+	</body>
+</html>
