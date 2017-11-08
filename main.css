@@ -98,7 +98,7 @@ body
 {
 	margin: auto;
 	width: 90%;
-	height: 400px;
+	height: 500px;
 }
 .line-graph-100 P
 {
@@ -145,7 +145,7 @@ body
 {
 	margin: auto;
 	width: 90%;
-	height: 300px;
+	height: 400px;
 }
 .line-graph-50 P
 {
@@ -153,4 +153,20 @@ body
 	font-family: Helvetica;
 	letter-spacing: 1px;
 	text-align: justify;
+}
+
+
+/*
+ * Mobile view
+ */
+@media screen and (orientation:portrait)
+{
+	.line-graph-50
+	{
+		width: 100%;
+	}
+	.line-graph-50 #chartdiv2, #chartdiv3
+	{
+		height: 500px;
+	}
 }
