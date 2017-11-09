@@ -1,0 +1,29 @@
+North Carolina,,
+,,
+State’s Immigration,Unauthorized,Authorized
+Increase Periods,"2006 – 2007, 2009 – 2011","2006 – 2008, 2009 – 2010, 2011 – 2012"
+Decrease Periods,"2008 – 2009, 2011 – 2012",
+Peak Year,2011,2012
+Lowest Year,2005/2006/2012,2006
+Census Over/Underestimation,0,
+,,
+Immigration From Mexico,Unauthorized,Authorized
+Different increase periods?,y,y
+Periods,"2005 – 2008, 2009 – 2011","2006 – 2007, 2009 – 2012"
+Different decrease periods?,n,y
+Periods,,2007 – 2009
+Census Over/Underestimation,10173 Over,
+,,
+State’s Immigration Popularity (Scenario),Unauthorized,Authorized
+2005,,
+2006,4,
+2007,3,1
+2008,1,3
+2009,3,3
+2010,1,1
+Census,2,
+2011,1,3
+2012,2,3
+,,
+,,
+See “state-immigration-population-scenarios.txt” for scenarios.,,
