@@ -6,10 +6,20 @@
 body
 {
 	margin: auto;
+	background-image: url("./image/datawall-logo-cover.png");
+	background-position: top;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100%;
+	text-align: center;
 }
 .container
 {
+	text-align: left;
+	display: inline-block;
 	max-width: 1500px;
+	margin: 0 auto;
+	background-color: rgba(255,255,255,0.9);
 }
 /*
  * Navigation Links
@@ -47,7 +57,7 @@ body
 {
 	display: block;
 	margin: auto;
-	max-height: 120px;
+	max-height: 100px;
 }
 /*
  * State Page Header
