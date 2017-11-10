@@ -1,3 +1,4 @@
+@keyframes fading{0%{opacity:0}100%{opacity:1}}
 /*
  * Container
  * The body of the website is centered on the screen.
@@ -22,6 +23,7 @@ body
 	background-color: rgba(255,255,255,0.9);
 	box-shadow: 1px 2px 9px rgba(0,0,0,.5);
 }
+
 /*
  * Navigation Links
  * Displays all of the links to pages at the top center of the screen.
@@ -67,6 +69,7 @@ body
  */
 .state-page-header h1
 {
+	animation:fading 2s;
 	text-align: center;
 	font-family: Helvetica;
 	font-size: 60px;
@@ -79,6 +82,7 @@ body
  */
 .line-graph-100
 {
+	animation:fading 2s;
 	width: 100%;
 
 	font-family: Helvetica;
@@ -126,6 +130,7 @@ body
  */
 .line-graph-50
 {
+	animation:fading 2s;
 	width: 49%;
 	float: left;
 	font-family: Helvetica;
