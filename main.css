@@ -18,8 +18,9 @@ body
 	text-align: left;
 	display: inline-block;
 	max-width: 1500px;
-	margin: 0 auto;
+	margin: 50px auto;
 	background-color: rgba(255,255,255,0.9);
+	box-shadow: 1px 2px 9px rgba(0,0,0,.5);
 }
 /*
  * Navigation Links
@@ -50,15 +51,16 @@ body
 	border-bottom: solid;
 }
 /*
- * DataWall Image
+ * DataWall Image - NOT USED (Template v2.0)
  * Small branding image that appears on each page.
- */
+ *
 .dataWall-banner-image img
 {
 	display: block;
 	margin: auto;
-	max-height: 100px;
+	max-height: 150px;
 }
+*/
 /*
  * State Page Header
  * Displays the name of the state
@@ -168,9 +170,18 @@ body
 
 /*
  * Mobile view
+ * Mostly for testing at this time.
  */
 @media screen and (orientation:portrait)
 {
+	body
+	{
+		background: white;
+	}
+	.container
+	{
+		margin: auto;
+	}
 	.line-graph-50
 	{
 		width: 100%;
