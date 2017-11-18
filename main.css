@@ -80,32 +80,32 @@ body
  * Line Graph 100
  * Line graphs that take up 100% width
  */
-.line-graph-100
+.line-graph-100, .text-area-100
 {
 	animation:fading 2s;
 	width: 100%;
 
 	font-family: Helvetica;
 }
-.line-graph-100 h2
+.line-graph-100 h2, .text-area-100 h2
 {
 	margin: 0 0 0 70px;
 
 	font-weight: 500;
 }
-.line-graph-100 h3
+.line-graph-100 h3, .text-area-100 h3
 {
 	margin: 0 0 0 100px;
 
 	font-weight: 300;
 }
-.line-graph-100 a
+.line-graph-100 a, .text-area-100 a
 {
 	color: lightgray;
 
 	text-decoration: none;
 }
-.line-graph-100 a:hover
+.line-graph-100 a:hover, .text-area-100 a:hover
 {
 	transition-duration: 0.2s;
 	color: black;
@@ -116,7 +116,7 @@ body
 	width: 90%;
 	height: 500px;
 }
-.line-graph-100 P
+.line-graph-100 p, .text-area-100 P
 {
 	margin: 10px 100px 10px 100px;
 	font-family: Helvetica;
