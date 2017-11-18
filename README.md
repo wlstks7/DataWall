@@ -1,5 +1,5 @@
 # DataWall
-DataWall is an accessible and interactive visualization of the data created by immigration from Mexico into the United States. Our site resolves the lack of accessibility to socially and culturally relevant immigration data using government verified information along with an easy-to-use graphical interface.
+DataWall is an interactive data website for legal and unauthorized immigration into the United States from Mexico.
 
 ## Upcoming
 - State pages contain descriptions for each graph.
@@ -8,9 +8,6 @@ DataWall is an accessible and interactive visualization of the data created by i
 - DataMap update.
 
 ## Updates
-### Template 2.2
-- Added support for text areas without graphs.
-- Added source links for the 50% graphs.
 ### Template 2.1
 - Content loads in smoother.
 - DataWall Favicon.
@@ -20,4 +17,4 @@ DataWall is an accessible and interactive visualization of the data created by i
 - Pages are no longer just white. Now every page follows a floating pane effect.
 
 -----------------
-### D|W 0.2.2 . Robert Roland . Chase Moudry
+### D|W 0.2.1 . Robert Roland . Chase Moudry
