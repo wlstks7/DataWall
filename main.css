@@ -23,7 +23,6 @@ body
 	background-color: rgba(255,255,255,0.9);
 	box-shadow: 1px 2px 9px rgba(0,0,0,.5);
 }
-
 /*
  * Navigation Links
  * Displays all of the links to pages at the top center of the screen.
@@ -77,15 +76,20 @@ body
 	text-transform: uppercase;
 }
 /*
- * Line Graph 100
- * Line graphs that take up 100% width
+ * Graph/Text 100
+ * Line graphs or text that take up 100% width
  */
+.text-area-100
+{
+	float: left;
+}
 .line-graph-100, .text-area-100
 {
 	animation:fading 2s;
 	width: 100%;
 
 	font-family: Helvetica;
+	line-height: 1.3;
 }
 .line-graph-100 h2, .text-area-100 h2
 {
@@ -109,6 +113,7 @@ body
 {
 	transition-duration: 0.2s;
 	color: black;
+	border-bottom: solid;
 }
 .line-graph-100 #chartdiv
 {
@@ -157,6 +162,7 @@ body
 {
 	transition-duration: 0.2s;
 	color: black;
+	border-bottom: solid;
 }
 .line-graph-50 #chartdiv2, #chartdiv3
 {
@@ -171,8 +177,6 @@ body
 	letter-spacing: 1px;
 	text-align: justify;
 }
-
-
 /*
  * Mobile view
  * Mostly for testing at this time.
