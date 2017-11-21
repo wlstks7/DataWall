@@ -8,6 +8,8 @@ DataWall is an accessible and interactive visualization of the data created by i
 - DataMap update.
 
 ## Updates
+### Template 2.4
+- State page links connected to appropriate sources
 ### Template 2.3
 - All links follow same look and animation action on hover.
 - Line spacing now 1.3.
@@ -24,4 +26,4 @@ DataWall is an accessible and interactive visualization of the data created by i
 - Pages are no longer just white. Now every page follows a floating pane effect.
 
 -----------------
-### D|W 0.2.3 . Robert Roland . Chase Moudry
+### D|W 0.2.4 . Robert Roland . Chase Moudry
