@@ -4,8 +4,14 @@ DataWall is an accessible and interactive visualization of the data created by i
 ## Upcoming
 - DataWall homepage.
 - DataMap update.
+- Mobile Experience.
 
 ## Updates
+### Update 0.2.5 r2
+- Rollout 2 of 2.
+- Fixed in-text links for Florida and Illinois.
+- All state pages contain text for each graph.
+- Template state ready to begin testing Mobile Experience.
 ### Update 0.2.5 r1
 - Rollout 1 of 2.
 - First half of state pages contain descriptions for each graph.
