@@ -1,3 +1,7 @@
+/*
+ * Animation
+ * Fade-in loading.
+ */
 @keyframes fading{0%{opacity:0}100%{opacity:1}}
 /*
  * Container
@@ -6,20 +10,30 @@
  */
 body
 {
+	/*Structure*/
 	margin: auto;
+	text-align: center;
+
+	/*Background*/
 	background-image: url("./image/datawall-logo-cover.png");
 	background-position: top;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	background-size: 100%;
-	text-align: center;
+	background-size: cover;
+
+	/*Font Family*/
+	font-family: Helvetica;
 }
 .container
 {
+	/*Structure*/
 	text-align: left;
 	display: inline-block;
 	max-width: 1500px;
 	margin: 50px auto;
+
+	/*Background*/
+	background-color: rgb(255,255,255); /*Fallback color*/
 	background-color: rgba(255,255,255,0.9);
 	box-shadow: 1px 2px 9px rgba(0,0,0,.5);
 }
@@ -29,42 +43,36 @@ body
  */
 .navigation-links
 {
-	margin: 25px auto 25px auto;
+	/*Structure*/
 	max-width: 750px;
+	margin: 25px auto 25px auto;
 
-	text-align: center;
-	font-family: Helvetica;
+	/*Font and Text*/
 	font-size: 12px;
+	text-align: center;
 	text-transform: uppercase;
 	letter-spacing: 3px;
 }
 .navigation-links a
 {
-	text-decoration: none;
-	color: darkgray;
+	/*Structure*/
 	margin-right: 15px;
+
+	/*Font and Text*/
+	text-decoration: none;
+	color: #6d6d6d;
 	line-height: 2;
 }
 .navigation-links a:hover
 {
+	/*Font and Text*/
 	transition-duration: 0.3s;
 	color: black;
 	border-bottom: solid;
 }
 /*
- * DataWall Image - NOT USED (Template v2.0)
- * Small branding image that appears on each page.
- *
-.dataWall-banner-image img
-{
-	display: block;
-	margin: auto;
-	max-height: 150px;
-}
-*/
-/*
- * State Page Header
- * Displays the name of the state
+ * Page Title
+ * Displays the name of the state/page.
  */
 .state-page-header h1
 {
@@ -77,7 +85,7 @@ body
 }
 /*
  * Graph/Text 100
- * Line graphs or text that take up 100% width
+ * Line graphs or text that take up 100% width.
  */
 .text-area-100
 {
@@ -105,7 +113,7 @@ body
 }
 .line-graph-100 a, .text-area-100 a
 {
-	color: lightgray;
+	color: #d3706f;
 
 	text-decoration: none;
 }
@@ -121,7 +129,7 @@ body
 	width: 90%;
 	height: 500px;
 }
-.line-graph-100 p, .text-area-100 P
+.line-graph-100 p, .text-area-100 p
 {
 	margin: 10px 100px 10px 100px;
 	font-family: Helvetica;
@@ -130,8 +138,8 @@ body
 }
 /*
  * Line Graph 50
- * Line graphs that take up half of the width,
- * two of these are able to be side by side
+ * Line graphs that take up half of the width.
+ * Two line graph 50's are able to be side by side.
  */
 .line-graph-50
 {
@@ -154,7 +162,7 @@ body
 }
 .line-graph-50 a
 {
-	color: lightgray;
+	color: #d3706f;
 
 	text-decoration: none;
 }
@@ -170,7 +178,7 @@ body
 	width: 90%;
 	height: 400px;
 }
-.line-graph-50 P
+.line-graph-50 p
 {
 	margin: 10px 50px 10px 100px;
 	font-family: Helvetica;
@@ -178,25 +186,108 @@ body
 	text-align: justify;
 }
 /*
- * Mobile view
- * Mostly for testing at this time.
+ * "Half-screen" Web View
+ * If the screen is portrait, rather than landscape,
+ * turn 50% graphs into 100% and fix margins.
  */
 @media screen and (orientation:portrait)
 {
-	body
-	{
-		background: white;
-	}
-	.container
-	{
-		margin: auto;
-	}
 	.line-graph-50
 	{
 		width: 100%;
 	}
-	.line-graph-50 #chartdiv2, #chartdiv3
+	.line-graph-50 p, .line-graph-50 h3, .text-area-100 h3
 	{
-		height: 500px;
+		margin-right: 100px;
 	}
+}
+
+/*
+ * DataMap
+ * CSS for DataMap specific items.
+ */
+.webgl-content *
+{
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+.webgl-content .logo, .progress
+{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+.webgl-content .logo
+{
+	background: url('/Builds/2017.10.28.1839/TemplateData/progressLogo.Light.png') no-repeat center / contain;
+	width: 154px;
+	height: 130px;
+}
+.webgl-content .progress
+{
+	height: 18px;
+	width: 141px;
+	margin-top: 90px;
+}
+.webgl-content .progress .empty
+{
+	background: url('/Builds/2017.10.28.1839/TemplateData/progressEmpty.Light.png') no-repeat right / cover;
+	float: right;
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+}
+.webgl-content .progress .full
+{
+	background: url('/Builds/2017.10.28.1839/TemplateData/progressFull.Light.png') no-repeat left / cover;
+	float: left;
+	width: 0%;
+	height: 100%;
+	display: inline-block;
+}
+.webgl-content .logo.Dark
+{
+	background-image: url('/Builds/2017.10.28.1839/TemplateData/progressLogo.Dark.png');
+}
+.webgl-content .progress.Dark .empty
+{
+	background-image: url('/Builds/2017.10.28.1839/TemplateData/progressEmpty.Dark.png');
+}
+.webgl-content .progress.Dark .full
+{
+	background-image: url('/Builds/2017.10.28.1839/TemplateData/progressFull.Dark.png');
+}
+.webgl-content .footer
+{
+	margin-top: 5px;
+	height: 38px;
+	line-height: 38px;
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+	font-size: 18px;
+}
+.webgl-content .footer .webgl-logo, .fullscreen
+{
+	height: 100%;
+	display: inline-block;
+	background: transparent center no-repeat;
+}
+.webgl-content .footer .webgl-logo
+{
+	background-image: url('/Builds/2017.10.28.1839/TemplateData/webgl-logo.png');
+	width: 204px;
+	float: left;
+}
+.webgl-content .footer .title
+{
+	margin-right: 10px;
+	float: right;
+}
+.webgl-content .footer .fullscreen
+{
+	background-image: url('/Builds/2017.10.28.1839/TemplateData/fullscreen.png');
+	width: 38px;
+	float: right;
 }

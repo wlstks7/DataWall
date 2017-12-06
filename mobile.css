@@ -1,0 +1,111 @@
+@keyframes fading{0%{opacity:0}100%{opacity:1}}
+/*
+ * Container
+ * The body of the website is centered on the screen.
+ * The container of all the content has a max of 1000px.
+ */
+body
+{
+	margin: auto;
+	background-color: white;
+	text-align: center;
+}
+.container
+{
+	text-align: left;
+	display: inline-block;
+	max-width: 1000px;
+	margin: 10px auto;
+	box-shadow: 1px 2px 9px rgba(0,0,0,.5);
+}
+/*
+ * Navigation Links
+ * Displays all of the links to pages at the top of the screen.
+ */
+.navigation-links
+{
+	background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+	padding: 25px 5px 25px 5px;
+	font-family: Helvetica;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	background-color: black;
+}
+.navigation-links a
+{
+	text-decoration: none;
+	color: white;
+	font-size: 60px;
+	margin-right: 35px;
+}
+.navigation-links a:hover
+{
+	transition-duration: 0.3s;
+	color: white;
+	border-bottom: solid;
+}
+/*
+ * Page Title
+ * Displays the name of the state/page.
+ */
+.state-page-header h1
+{
+	animation:fading 2s;
+	text-align: center;
+	font-family: Helvetica;
+	font-size: 60px;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+/*
+ * Graph/Text 50/100
+ * Line graphs or text that take up 100% width
+ */
+.line-graph-100, .text-area-100, .line-graph-50
+{
+	animation:fading 2s;
+	width: 100%;
+
+	font-family: Helvetica;
+	font-size: 20px;
+	line-height: 1.3;
+}
+.line-graph-100 h2, .text-area-100 h2, .line-graph-50 h2
+{
+	margin: 0 0 0 30px;
+
+	font-weight: 500;
+}
+.line-graph-100 h3, .text-area-100 h3, .line-graph-50 h3
+{
+	margin: 0 0 0 50px;
+
+	font-weight: 300;
+}
+.line-graph-100 a, .text-area-100 a, .line-graph-50 a
+{
+	color: #d3706f;
+
+	text-decoration: none;
+}
+.line-graph-100 a:hover, .text-area-100 a:hover, .line-graph-50 a:hover
+{
+	transition-duration: 0.2s;
+	color: black;
+	border-bottom: solid;
+}
+.line-graph-100 #chartdiv, .line-graph-50 #chartdiv2, #chartdiv3
+{
+	margin: auto;
+	width: 100%;
+	height: 500px;
+}
+.line-graph-100 p, .text-area-100 p, .line-graph-50 P
+{
+	font-size: 20px;
+	margin: 10px 40px 40px 40px;
+	letter-spacing: 1px;
+	text-align: justify;
+}
