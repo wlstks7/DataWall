@@ -3,15 +3,226 @@
 	<head>
 		<meta charset="utf8" />
 		<title>DataWall | The Digital Border</title>
-		<link rel="stylesheet" media="screen and (min-device-width:1001px)" type="text/css" href="../main.css"/>
-		<link rel="stylesheet" media="screen and (max-device-width:1000px)" type="text/css" href="../mobile.css">
+		<link rel="stylesheet" media="screen and (min-device-width:1001px)" type="text/css" href="./main.css"/>
+		<link rel="stylesheet" media="screen and (max-device-width:1000px)" type="text/css" href="./mobile.css">
 		<link rel="shortcut icon" href="./image/datawall_ico.ico">
+
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
+
+		<!--Chart 1-->
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"categoryField": "category",
+					"angle": 10,
+					"depth3D": 20,
+					"startDuration": 1,
+					"theme": "patterns",
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-1",
+							"title": "Unauthorized from Mexico",
+							"type": "column",
+							"valueField": "column-1"
+						},
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-2",
+							"title": "Unauthorized from All Other",
+							"type": "column",
+							"valueField": "column-2"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"stackType": "regular",
+							"title": "Axis title"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"useGraphSettings": true
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Total Unauthorized Immigration"
+						}
+					],
+					"dataProvider": [
+						{
+							"category": "2005",
+							"column-1": "5970000",
+							"column-2": "4520000"
+						},
+						{
+							"category": "2006",
+							"column-1": "6570000",
+							"column-2": "4740000"
+						},
+						{
+							"category": "2007",
+							"column-1": "6980000",
+							"column-2": "4800000"
+						},
+						{
+							"category": "2008",
+							"column-1": "7030000",
+							"column-2": "4570000"
+						},
+						{
+							"category": "2009",
+							"column-1": "6650000",
+							"column-2": "4100000"
+						},
+						{
+							"category": "2010",
+							"column-1": "6640000",
+							"column-2": "4150000"
+						},
+						{
+							"category": "Census",
+							"column-1": "6830000",
+							"column-2": "4760000"
+						},
+						{
+							"category": "2011",
+							"column-1": "6800000",
+							"column-2": "4710000"
+						},
+						{
+							"category": "2012",
+							"column-1": "6720000",
+							"column-2": "4710000"
+						}
+					]
+				}
+			);
+		</script>
+
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/patterns.js"></script>
+
+		<!--Chart 2-->
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv2",
+				{
+					"type": "serial",
+					"categoryField": "category",
+					"angle": 10,
+					"depth3D": 20,
+					"startDuration": 1,
+					"theme": "patterns",
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-1",
+							"title": "LPR from Mexico",
+							"type": "column",
+							"valueField": "column-1"
+						},
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-2",
+							"title": "LPR from All Other",
+							"type": "column",
+							"valueField": "column-2"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"stackType": "regular",
+							"title": "Axis title"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"useGraphSettings": true
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Total Legal Permanent Residence"
+						}
+					],
+					"dataProvider": [
+						{
+							"category": "2006",
+							"column-1": "3310000",
+							"column-2": "8800000"
+						},
+						{
+							"category": "2007",
+							"column-1": "3470000",
+							"column-2": "9310000"
+						},
+						{
+							"category": "2008",
+							"column-1": "3390000",
+							"column-2": "9210000"
+						},
+						{
+							"category": "2009",
+							"column-1": "3280000",
+							"column-2": "9170000"
+						},
+						{
+							"category": "2010",
+							"column-1": "3290000",
+							"column-2": "9340000"
+						},
+						{
+							"category": "2011",
+							"column-1": "3320000",
+							"column-2": "9750000"
+						},
+						{
+							"category": "2012",
+							"column-1": "3330000",
+							"column-2": "9970000"
+						}
+					]
+				}
+			);
+		</script>
 	</head>
+
 	<body>
 		<div class="container">
 			<div class="navigation-links">
 				<a href="./index.html">DataWall</a>
-				<a href="./Builds/2017.10.28.1839/index.html">DataMap</a>
+				<a href="./Builds/2017.12.07.0110/index.html">DataMap</a>
 				<a href="./resources.html">Resources</a>
 				<a href="./state/arizona.html">Arizona</a>
 				<a href="./state/california.html">California</a>
@@ -23,6 +234,40 @@
 				<a href="./state/north-carolina.html">North Carolina</a>
 				<a href="./state/texas.html">Texas</a>
 				<a href="./state/washington.html">Washington</a>
+			</div>
+			<div class="home-page-header">
+				<h1>
+					DataWall
+				</h1>
+				<h2>
+					The Digital Border
+				</h2>
+			</div>
+			<div class="home-page-intro">
+				<p>
+					An accessible and interactive visualization of the data created by immigration from Mexico into the United States. DataWall resolves the lack of accessibility to socially and culturally relevant immigration data using government verified information along with an easy-to-use graphical interface.
+				</p>
+			</div>
+			<div class="line-graph-100">
+				<h1>
+					What's in DataWall Release 1?
+				</h1>
+				<div id="chartdiv"></div>
+				<h3>
+					Unauthorized Immigration into the United States | <a href="./resources.html#primary-sources">Source</a>
+				</h3>
+				<p>
+					In DataWall's first release, our platform focuses on unauthorized immigration into the United States with a specific focus on immigration from Mexico. Why? Almost 60% of all unauthorized immigrants in the U.S. from 2005 to 2010 originate from Mexico. Studying the trend of all immigration versus immigration from Mexico can give an insight to popular states, growth, and decreases of immigration from country to country.
+				</p>
+			</div>
+			<div class="line-graph-100">
+				<div id="chartdiv2"></div>
+				<h3>
+					Legal Permanent Residence in the United States | <a href="./resources.html#primary-sources">Source</a>
+				</h3>
+				<p>
+					The platform also focuses on legal permanent residentce in the United States with a specific focus on legal residence from Mexico. About one fourth of all legal permanent residents in the US from 2006 to 2012 are from Mexico.
+				</p>
 			</div>
 		</div>
 	</body>
