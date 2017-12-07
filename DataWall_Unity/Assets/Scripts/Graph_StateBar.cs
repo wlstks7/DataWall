@@ -5,11 +5,16 @@ public class Graph_StateBar : MonoBehaviour
 {
     public void UpdateBarSize(float percentage)
     {
+        this.transform.localPosition = new Vector3(this.transform.localPosition.x, percentage / 2, this.transform.localPosition.z);
+        this.transform.localScale = new Vector3(this.transform.localScale.x, percentage, this.transform.localScale.z);
+
+        /*
         this.transform.localPosition = new Vector3(this.transform.localPosition.x, 0, this.transform.localPosition.z);
-        this.transform.localScale.Set(this.transform.localScale.x, 0, this.transform.localScale.z);
+        this.transform.localScale = new Vector3(this.transform.localScale.x, 0, this.transform.localScale.z);
 
         this.StopCoroutine("LerpScale");
         this.StartCoroutine(LerpScale(percentage));
+        */
     }
 
     private IEnumerator LerpScale(float percentage)
