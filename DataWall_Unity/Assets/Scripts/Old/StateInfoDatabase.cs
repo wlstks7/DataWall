@@ -82,7 +82,7 @@ public class StateInfoDatabase : MonoBehaviour
 			return;
 		}
 
-		foreach (var state in this.stateList)
+		foreach (StateInfo state in this.stateList)
 		{
 			for (int i = 0; i < state.timelineData.Length; i++)
 			{

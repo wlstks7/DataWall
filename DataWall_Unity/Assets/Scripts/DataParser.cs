@@ -18,9 +18,9 @@ public class DataParser : MonoBehaviour
         Parser = this;
 
         Parser.StartCoroutine(Parser.ParseFileData(
-            SearchOptions.CurrentFilter_FormatType,
-            SearchOptions.CurrentFilter_ImmigrationType,
-            SearchOptions.CurrentFilter_DataYear));
+            Data_SearchOptions.CurrentFilter_FormatType,
+            Data_SearchOptions.CurrentFilter_ImmigrationType,
+            Data_SearchOptions.CurrentFilter_DataYear));
     }
 
     [ContextMenu("Test ParseData()")]
@@ -81,7 +81,6 @@ public class DataParser : MonoBehaviour
                 this.result[i] = this.result[i].Split(',')[(int)dataYear - (int)DataYear.Five];
             }
 
-
             this.UI_AddCategoryBox(numberFormat);
         }
 
@@ -98,11 +97,33 @@ public class DataParser : MonoBehaviour
 
         UI_CategoryBoxInfo info = textBox.GetComponent<UI_CategoryBoxInfo>();
 
-        info.categoryLabel.text = numberFormat;
+        info.categoryLabel.text =
+            Data_SearchOptions.CurrentFilter_FormatType.ToString() + " " +
+            numberFormat + " " +
+            ((int)Data_SearchOptions.CurrentFilter_DataYear).ToString();
 
-        for (int i = 0; i < System.Enum.GetNames(typeof(StateName)).Length + 1; i++)
+        int length = System.Enum.GetNames(typeof(StateName)).Length + 1;
+
+        for (int i = 0; i < length; i++)
         {
-            info.stateDataList[i].text = this.result[i];
+            switch ((NumberFormat)System.Enum.Parse(typeof(NumberFormat), numberFormat))
+            {
+                case NumberFormat.Nominal:
+                    info.stateDataList[i].text = this.result[i];
+                    break;
+                case NumberFormat.Percentage:
+                    info.stateDataList[i].text = this.result[i] + '%';
+
+                    if (i < length - 1)
+                    {
+                        Graph_BarHandler.GraphHandler.barList[i].UpdateBarSize(float.Parse(this.result[i],
+                            System.Globalization.CultureInfo.InvariantCulture.NumberFormat));
+                    }
+                    break;
+                default:
+                    Debug.LogError("An error occurred while updating the search filter dropdowns.");
+                    break;
+            }
         }
     }
 
