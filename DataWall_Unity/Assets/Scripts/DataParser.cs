@@ -87,6 +87,8 @@ public class DataParser : MonoBehaviour
         #endregion
 
         UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(this.GetComponent<RectTransform>());
+
+        yield break;
     }
 
     private void UI_AddCategoryBox(string numberFormat)

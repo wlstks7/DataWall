@@ -29,5 +29,7 @@ public class Graph_StateBar : MonoBehaviour
             this.transform.localPosition = Vector3.Lerp(targetPosition, initialPosition, timeRemaining / lerpSpeed);
             yield return null;
         }
+
+        yield break;
     }
 }
