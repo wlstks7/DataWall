@@ -77,12 +77,16 @@ public class DataParser : MonoBehaviour
 
             //TODO: Multi-year parsing
 
-            //Result Data equals comma-separated string array - each element equals timeline data for each line (a state)
+            //Result now equals comma-separated string array - each element equals timeline data for each line (a state)
             // > Sample Element: "1,2222,3,4444,55,666,77,888888,9999"
 
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] = result[i].Split(',')[(int)dataYear - (int)DataYear.Five];
+                string[] stateInfo = result[i].Split(',');
+                Debug.Log(Time.time + ": StateInfo data (Timeline) = \"" + stateInfo + "\" i = " + i);
+
+                result[i] = stateInfo[((int)dataYear) - 2005];
+                Debug.Log(Time.time + ": StateInfo data (" + dataYear.ToString() + ") = \"" + stateInfo + "\" i = " + i);
             }
 
             Debug.Log(Time.time + ": Adding UI Elements.");
