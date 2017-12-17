@@ -83,10 +83,17 @@ public class DataParser : MonoBehaviour
             for (int i = 0; i < result.Length; i++)
             {
                 string[] stateInfo = result[i].Split(',');
-                Debug.Log(Time.time + ": StateInfo data (Timeline) = \"" + stateInfo + "\" i = " + i);
+                Debug.Log(Time.time + ": StateInfo data (Timeline) || i = " + i);
 
-                result[i] = stateInfo[((int)dataYear) - 2005];
-                Debug.Log(Time.time + ": StateInfo data (" + dataYear.ToString() + ") = \"" + stateInfo + "\" i = " + i);
+                try
+                {
+                    result[i] = stateInfo[((int)dataYear) - 2005];
+                    Debug.Log(Time.time + ": StateInfo data (" + dataYear.ToString() + ") = \"" + result[i] + "\" || i = " + i);
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError(Time.time + ": " + e.Message);
+                }
             }
 
             Debug.Log(Time.time + ": Adding UI Elements.");
