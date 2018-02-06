@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Graph_BarHandler : MonoBehaviour
 {
-    public static Graph_BarHandler GraphHandler;
+    public static Graph_BarHandler GraphHandler { get; private set; }
 
     [SerializeField]
     internal List<Graph_StateBar> barList;

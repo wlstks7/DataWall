@@ -13,8 +13,11 @@ public class DataParser : MonoBehaviour
     private void Awake()
     {
         Parser = this;
+    }
 
-        Parser.StopCoroutine("ParseFileData");
+    private void Start()
+    {
+        StopAllCoroutines();
         Parser.StartCoroutine(Parser.ParseFileData(
             Data_SearchOptions.CurrentFilter_FormatType,
             Data_SearchOptions.CurrentFilter_ImmigrationType,
@@ -28,7 +31,7 @@ public class DataParser : MonoBehaviour
         ImmigrationType immigrationType = ImmigrationType.Unauthorized;
         DataYear dataYear = DataYear.Five;
 
-        StopCoroutine("ParseFileData");
+        StopAllCoroutines();
         StartCoroutine(ParseFileData(formatType, immigrationType, dataYear));
     }
 
@@ -55,7 +58,7 @@ public class DataParser : MonoBehaviour
             if (filePath.Contains("://"))
             {
                 var www = Networking.UnityWebRequest.Get(filePath);
-                yield return www.Send();
+                yield return www.SendWebRequest();
                 result = www.downloadHandler.text.Split('\n');
             }
             else
@@ -70,8 +73,6 @@ public class DataParser : MonoBehaviour
                     throw;
                 }
             }
-
-            yield return new WaitUntil(() => result != null);
 
             Debug.Log(Time.time + ": Data Successfully Retrieved From " + filePath + ".");
 
@@ -98,7 +99,7 @@ public class DataParser : MonoBehaviour
 
             Debug.Log(Time.time + ": Adding UI Elements.");
 
-            this.UI_AddCategoryBox(ref result, numberFormat);
+            this.UI_AddCategoryBox(result, numberFormat);
         }
 
         #endregion
@@ -110,7 +111,7 @@ public class DataParser : MonoBehaviour
         yield break;
     }
 
-    private void UI_AddCategoryBox(ref string[] result, string numberFormat)
+    private void UI_AddCategoryBox(string[] result, string numberFormat)
     {
         var textBox = Instantiate(Resources.Load(categoryBox_AssetName, typeof(GameObject)), this.transform) as GameObject;
 
@@ -118,10 +119,9 @@ public class DataParser : MonoBehaviour
 
         UI_CategoryBoxInfo info = textBox.GetComponent<UI_CategoryBoxInfo>();
 
-        info.categoryLabel.text =
-            Data_SearchOptions.CurrentFilter_FormatType.ToString() + " " +
-            numberFormat + " " +
-            ((int)Data_SearchOptions.CurrentFilter_DataYear).ToString();
+        info.categoryLabel.text = Data_SearchOptions.CurrentFilter_FormatType.ToString() +
+            " " + numberFormat +
+            " " + ((int)Data_SearchOptions.CurrentFilter_DataYear).ToString();
 
         int length = System.Enum.GetNames(typeof(StateName)).Length + 1;
 

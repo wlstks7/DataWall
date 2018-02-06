@@ -26,7 +26,14 @@ public class UI_SearchOptionsDropdown : MonoBehaviour
                 this.searchDropdown.AddOptions(new List<string>(System.Enum.GetNames(typeof(ImmigrationType))));
                 break;
             case SearchOption.DataYear:
-                this.searchDropdown.AddOptions(new List<string>(System.Enum.GetNames(typeof(DataYear))));
+                var infoList = new List<string>();
+
+                foreach (var element in (DataYear[])System.Enum.GetValues(typeof(DataYear)))
+                {
+                    infoList.Add(((int)element).ToString());
+                }
+
+                this.searchDropdown.AddOptions(infoList);
                 break;
             default:
                 Debug.LogError("An error occurred while updating the search filter dropdowns.");
