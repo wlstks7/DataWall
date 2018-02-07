@@ -74,7 +74,7 @@ public class DataParser : MonoBehaviour
                 }
             }
 
-            Debug.Log(Time.time + ": Data Successfully Retrieved From " + filePath + ".");
+            Debug.Log(Time.time + ": " + numberFormat + " data successfully retrieved.");
 
             Debug.Log(Time.time + ": Result length = " + result.Length);
 
@@ -86,12 +86,12 @@ public class DataParser : MonoBehaviour
             for (int i = 0; i < result.Length; i++)
             {
                 string[] stateInfo = result[i].Split(',');
-                Debug.Log(Time.time + ": StateInfo data (Timeline) || i = " + i);
+                //Debug.Log(Time.time + ": StateInfo data (Timeline) || i = " + i);
 
                 try
                 {
                     result[i] = stateInfo[((int)dataYear) - 2005];
-                    Debug.Log(Time.time + ": StateInfo data (" + dataYear.ToString() + ") = \"" + result[i] + "\" || i = " + i);
+                    //Debug.Log(Time.time + ": StateInfo data (" + dataYear.ToString() + ") = \"" + result[i] + "\" || i = " + i);
                 }
                 catch (System.Exception e)
                 {
