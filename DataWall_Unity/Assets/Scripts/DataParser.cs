@@ -76,6 +76,8 @@ public class DataParser : MonoBehaviour
 
             Debug.Log(Time.time + ": Data Successfully Retrieved From " + filePath + ".");
 
+            Debug.Log(Time.time + ": Result length = " + result.Length);
+
             //TODO: Multi-year parsing
 
             //Result now equals comma-separated string array - each element equals timeline data for each line (a state)
