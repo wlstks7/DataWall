@@ -1,5 +1,5 @@
 # DataWall
-DataWall is an accessible and interactive visualization of the data created by immigration from Mexico into the United States. Our site resolves the lack of accessibility to socially and culturally relevant immigration data using government verified information along with an easy-to-use graphical interface.
+DataWall: The Digital Border is an interactive web-based data visualization platform built to feature the data created by immigration from Mexico into the United States. DataWall resolves the lack of accessibility to socially and culturally relevant immigration data using government-verified statistics along with an easy-to-use graphical interface.
 
 ## Upcoming
 - DataMap mobile edition.
