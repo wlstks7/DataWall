@@ -1,5 +1,8 @@
-﻿public enum NumberFormat
+﻿namespace Enums
 {
-    Nominal,
-    Percentage
+	public enum NumberFormat
+	{
+		Nominal,
+		Percentage
+	}
 }
