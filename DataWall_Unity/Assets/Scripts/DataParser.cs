@@ -42,7 +42,7 @@ public class DataParser : MonoBehaviour
 
 		foreach (string numberFormat in System.Enum.GetNames(typeof(NumberFormat)))
 		{
-			string filePath = System.IO.Path.Combine("https://raw.githubusercontent.com/RGRoland/DataWall/gh-pages/DataWall_Unity/Assets/StreamingAssets/",
+			string filePath = System.IO.Path.Combine("https://raw.githubusercontent.com/RGRoland/DataWall/gh-pages/Files/DataWall-Files/Raw/",
 				Data_FilterFlags.Filter_Format.ToString() + numberFormat + Data_FilterFlags.Filter_Legality.ToString() + ".csv");
 
 			Debug.Log(Time.time + ": Filepath = " + filePath);
