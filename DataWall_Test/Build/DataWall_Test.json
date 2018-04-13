@@ -6,7 +6,7 @@
 "asmMemoryUrl": "DataWall_Test.asm.memory.unityweb",
 "asmFrameworkUrl": "DataWall_Test.asm.framework.unityweb",
 "asmSymbolsUrl": "DataWall_Test.asm.symbols.unityweb",
-"TOTAL_MEMORY": 134217728,
+"TOTAL_MEMORY": 67108864,
 "graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
 "splashScreenStyle": "Dark",
