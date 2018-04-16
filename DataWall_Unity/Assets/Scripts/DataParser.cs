@@ -2,43 +2,130 @@
 using UnityEngine;
 using Networking = UnityEngine.Networking;
 using Enums;
-using UnityEngine.UI;
 
+[RequireComponent(typeof(Camera))]
 public class DataParser : MonoBehaviour
 {
-	public const string categoryBox_AssetName = "Timeline Data Container";
+	private const string categoryBox_AssetName = "Timeline Data Container";
 
+	internal static DataParser Instance { get; set; }
+
+	[Header("UI Windows")]
 	[SerializeField]
-	private GameObject m_FiltersTab;
+	private GameObject m_MapWindow;
 	[SerializeField]
-	private Button m_ParserButton;
+	private GameObject m_DataWindow;
 	[SerializeField]
 	private GameObject m_ContentContainer;
 
+	[Header("Camera Defaults")]
+	[SerializeField]
+	private Vector3 m_DefaultPosition = Vector3.zero;
+	[SerializeField]
+	private float m_DefaultOrthoSize = 5f;
+
+	[Header("Camera Movement Settings")]
+	[SerializeField]
+	private float m_OrthoZoomSpeed = 0.1f;
+	[SerializeField]
+	private float m_CameraMoveSpeed = 0.1f;
+
 	private List<GameObject> categoryBoxList = new List<GameObject>();
+	private Camera m_Camera;
 
 	private void Awake()
 	{
-		this.m_ParserButton.onClick.AddListener(() =>
-		{
-			StopCoroutine("ParseFileData");
-			StartCoroutine("ParseFileData");
-		});
+		Instance = this;
+
+		Instance.m_Camera = Instance.GetComponent<Camera>();
+
+		Instance.ResetCamera_Hard();
+		Instance.CameraToMapView();
 	}
 
-	private void Start()
+	public void ResetCamera_Smooth()
 	{
-		Data_FilterFlags.Filter_State = StateName.Arizona;
+		UpdateCamera(Instance.m_DefaultPosition, Instance.m_DefaultOrthoSize);
 	}
 
-	private System.Collections.IEnumerator ParseFileData()
+	[ContextMenu("Reset Camera Position")]
+	private void ResetCamera_Hard()
+	{
+		this.transform.position = this.m_DefaultPosition;
+		this.GetComponent<Camera>().orthographicSize = this.m_DefaultOrthoSize;
+	}
+
+	public void CameraToDataView()
+	{
+		Instance.m_DataWindow.SetActive(true);
+		Instance.m_MapWindow.SetActive(false);
+	}
+
+	public void CameraToMapView()
+	{
+		Instance.m_MapWindow.SetActive(true);
+		Instance.m_DataWindow.SetActive(false);
+
+		ClearStoredData();
+		Instance.ResetCamera_Smooth();
+	}
+
+	internal static void UpdateCamera(Vector3 newPosition, float newOrthoSize)
+	{
+		Instance.StopCoroutine("UpdateCameraPosition");
+		Instance.StartCoroutine("UpdateCameraPosition", newPosition);
+
+		Instance.StopCoroutine("UpdateCameraOrthoSize");
+		Instance.StartCoroutine("UpdateCameraOrthoSize", newOrthoSize);
+	}
+
+	private System.Collections.IEnumerator UpdateCameraPosition(Vector3 newPosition)
+	{
+		while (true)
+		{
+			if (Instance.m_Camera.transform.position == newPosition)
+			{
+				yield break;
+			}
+
+			Instance.m_Camera.transform.position = Vector3
+				.Lerp(Instance.m_Camera.transform.position, newPosition, Instance.m_OrthoZoomSpeed);
+
+			yield return null;
+		}
+	}
+
+	private System.Collections.IEnumerator UpdateCameraOrthoSize(float newOrthoSize)
+	{
+		while (true)
+		{
+			if (Instance.m_Camera.orthographicSize == newOrthoSize)
+			{
+				yield break;
+			}
+
+			Instance.m_Camera.orthographicSize = Mathf
+				.Lerp(Instance.m_Camera.orthographicSize, newOrthoSize, Instance.m_CameraMoveSpeed);
+
+			yield return null;
+		}
+	}
+
+	public void ParseData()
+	{
+		Instance.StopCoroutine("UpdateData");
+		Instance.StartCoroutine("UpdateData");
+	}
+
+	private System.Collections.IEnumerator UpdateData()
 	{
 		Debug.Log(Time.time + ": PARSE");
+
 		string[] result;
 
 		//TODO: Multi-category support
 
-		this.ClearStoredData();
+		ClearStoredData();
 
 		foreach (string numberFormat in System.Enum.GetNames(typeof(NumberFormat)))
 		{
@@ -65,7 +152,7 @@ public class DataParser : MonoBehaviour
 
 			Debug.Log(Time.time + ": Adding UI Elements.");
 
-			this.UI_AddCategoryBox(result, numberFormat);
+			UI_AddCategoryBox(result, numberFormat);
 
 			yield return null;
 		}
@@ -73,12 +160,12 @@ public class DataParser : MonoBehaviour
 		yield break;
 	}
 
-	private void UI_AddCategoryBox(string[] result, string numberFormat)
+	private static void UI_AddCategoryBox(string[] result, string numberFormat)
 	{
-		StateDataPanel boxInfo = Instantiate(Resources.Load<GameObject>(categoryBox_AssetName), this.m_ContentContainer.transform)
+		StateDataPanel boxInfo = Instantiate(Resources.Load<GameObject>(categoryBox_AssetName), Instance.m_ContentContainer.transform)
 			.GetComponent<StateDataPanel>();
 
-		this.categoryBoxList.Add(boxInfo.gameObject);
+		Instance.categoryBoxList.Add(boxInfo.gameObject);
 
 		boxInfo.categoryLabel.text = Data_FilterFlags.Filter_Format.ToString() + ": " + numberFormat;
 
@@ -101,9 +188,9 @@ public class DataParser : MonoBehaviour
 		}
 	}
 
-	private void ClearStoredData()
+	private static void ClearStoredData()
 	{
-		foreach (GameObject box in this.categoryBoxList)
+		foreach (GameObject box in Instance.categoryBoxList)
 		{
 			if (box != null)
 			{
@@ -111,6 +198,6 @@ public class DataParser : MonoBehaviour
 			}
 		}
 
-		this.categoryBoxList.Clear();
+		Instance.categoryBoxList.Clear();
 	}
 }
