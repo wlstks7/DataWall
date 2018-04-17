@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Networking = UnityEngine.Networking;
 using Enums;
@@ -20,8 +21,6 @@ public class DataParser : MonoBehaviour
 
 	[Header("Camera Defaults")]
 	[SerializeField]
-	private Vector3 m_DefaultPosition = Vector3.zero;
-	[SerializeField]
 	private float m_DefaultOrthoSize = 5f;
 
 	[Header("Camera Movement Settings")]
@@ -39,24 +38,27 @@ public class DataParser : MonoBehaviour
 
 		Instance.m_Camera = Instance.GetComponent<Camera>();
 
-		Instance.ResetCamera_Hard();
+		Instance.Test_ResetCamera_Hard();
 		Instance.CameraToMapView();
 	}
 
 	public void ResetCamera_Smooth()
 	{
-		UpdateCamera(Instance.m_DefaultPosition, Instance.m_DefaultOrthoSize);
+		UpdateCamera(Vector3.zero, Instance.m_DefaultOrthoSize);
+		CameraPoint.EnableAllPoints();
 	}
 
 	[ContextMenu("Reset Camera Position")]
-	private void ResetCamera_Hard()
+	private void Test_ResetCamera_Hard()
 	{
-		this.transform.position = this.m_DefaultPosition;
+		this.transform.position = Vector3.zero;
 		this.GetComponent<Camera>().orthographicSize = this.m_DefaultOrthoSize;
 	}
 
 	public void CameraToDataView()
 	{
+		ClearStoredData();
+
 		Instance.m_DataWindow.SetActive(true);
 		Instance.m_MapWindow.SetActive(false);
 	}
@@ -66,7 +68,6 @@ public class DataParser : MonoBehaviour
 		Instance.m_MapWindow.SetActive(true);
 		Instance.m_DataWindow.SetActive(false);
 
-		ClearStoredData();
 		Instance.ResetCamera_Smooth();
 	}
 
@@ -119,7 +120,7 @@ public class DataParser : MonoBehaviour
 
 	private System.Collections.IEnumerator UpdateData()
 	{
-		Debug.Log(Time.time + ": PARSE");
+		Debug.Log(Time.time + ": PARSE START");
 
 		string[] result;
 
@@ -127,12 +128,16 @@ public class DataParser : MonoBehaviour
 
 		ClearStoredData();
 
-		foreach (string numberFormat in System.Enum.GetNames(typeof(NumberFormat)))
-		{
-			string filePath = System.IO.Path.Combine("https://raw.githubusercontent.com/RGRoland/DataWall/gh-pages/Files/DataWall-Files/Raw/",
-				Data_FilterFlags.Filter_Format.ToString() + numberFormat + Data_FilterFlags.Filter_Legality.ToString() + ".csv");
+		FilterFlags.ApplyFilters();
 
-			Debug.Log(Time.time + ": Filepath = " + filePath);
+		foreach (string numberFormat in Enum.GetNames(typeof(NumberFormat)))
+		{
+			string filePath = System.IO.Path.Combine(
+				"https://raw.githubusercontent.com/RGRoland/DataWall/gh-pages/Files/DataWall-Files/Raw/",
+				FilterFlags.CurrentFilters.Filter_Format.ToString() +
+				numberFormat +
+				FilterFlags.CurrentFilters.Filter_Legality.ToString() +
+				".csv");
 
 			var www = Networking.UnityWebRequest.Get(filePath);
 
@@ -148,7 +153,7 @@ public class DataParser : MonoBehaviour
 			// Result now equals comma-separated string array - each element equals timeline data for each line (a state)
 			// > Sample Element: "1,2222,3,4444,55,666,77,888888,9999"
 
-			result = result[Data_FilterFlags.Filter_State.ToIndex()].Split(',');
+			result = result[FilterFlags.CurrentFilters.Filter_State.ToIndex()].Split(',');
 
 			Debug.Log(Time.time + ": Adding UI Elements.");
 
@@ -156,6 +161,8 @@ public class DataParser : MonoBehaviour
 
 			yield return null;
 		}
+
+		Debug.Log(Time.time + ": PARSE END");
 
 		yield break;
 	}
@@ -167,16 +174,16 @@ public class DataParser : MonoBehaviour
 
 		Instance.categoryBoxList.Add(boxInfo.gameObject);
 
-		boxInfo.categoryLabel.text = Data_FilterFlags.Filter_Format.ToString() + ": " + numberFormat;
+		boxInfo.categoryLabel.text = FilterFlags.CurrentFilters.Filter_Format.ToString() + ": " + numberFormat;
 
-		int length = System.Enum.GetNames(typeof(DataYear)).Length;
+		int length = Enum.GetNames(typeof(DataYear)).Length;
 
 		for (int i = 0; i < length; i++)
 		{
-			switch ((NumberFormat)System.Enum.Parse(typeof(NumberFormat), numberFormat))
+			switch ((NumberFormat)Enum.Parse(typeof(NumberFormat), numberFormat))
 			{
 				case NumberFormat.Nominal:
-					boxInfo.stateDataList[i].text = result[i];
+					boxInfo.stateDataList[i].text = String.Format("{0:n0}", Int32.Parse(result[i]));
 					break;
 				case NumberFormat.Percentage:
 					boxInfo.stateDataList[i].text = result[i] + '%';
@@ -190,14 +197,17 @@ public class DataParser : MonoBehaviour
 
 	private static void ClearStoredData()
 	{
-		foreach (GameObject box in Instance.categoryBoxList)
+		if (FilterFlags.IsDirty)
 		{
-			if (box != null)
+			foreach (GameObject box in Instance.categoryBoxList)
 			{
-				Destroy(box);
+				if (box != null)
+				{
+					Destroy(box);
+				}
 			}
-		}
 
-		Instance.categoryBoxList.Clear();
+			Instance.categoryBoxList.Clear();
+		}
 	}
 }

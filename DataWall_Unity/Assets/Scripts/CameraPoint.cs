@@ -1,29 +1,87 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using Enums;
 
+[RequireComponent(typeof(BoxCollider))]
 public class CameraPoint : MonoBehaviour
 {
 	private static List<CameraPoint> CameraPoints = new List<CameraPoint>(10);
 
-	public Vector3 Position { get { return this.transform.position; } }
+	private Vector3 CameraPosition
+	{
+		get
+		{
+			return new Vector3(this.transform.position.x, this.transform.position.y) +
+				this.CameraOffset;
+		}
+	}
 
-	public Enums.StateName m_State = Enums.StateName.Arizona;
-	public float m_OrthoSize = 1.5f;
+	private Vector3 CameraOffset
+	{
+		get
+		{
+			return this.GetComponent<BoxCollider>().center + (Vector3)this.m_CameraOffset;
+		}
+	}
 
-	public void OnEnable()
+	[SerializeField]
+	private StateName m_State = StateName.Arizona;
+	[SerializeField]
+	private float m_OrthoSize = 5f;
+	[SerializeField]
+	private Vector2 m_CameraOffset;
+
+	private void OnEnable()
 	{
 		CameraPoints.Add(this);
 	}
 
-	public void OnDestroy()
+	private void OnDestroy()
 	{
 		CameraPoints.Remove(this);
 	}
 
-	public static CameraPoint GetCameraPoint(Enums.StateName stateName)
+	private void OnMouseDown()
 	{
-		return CameraPoints.First((point) => point.m_State == stateName);
+		FilterFlags.UpdateFilter(this.m_State);
+
+		DataParser.UpdateCamera(this.CameraPosition, this.m_OrthoSize);
+		DataParser.Instance.CameraToDataView();
+
+		this.DisableOtherPoints();
+	}
+
+	[ContextMenu("Move Camera to Point")]
+	private void Test_MoveCamera()
+	{
+		Camera.main.transform.position = this.CameraPosition;
+		Camera.main.orthographicSize = this.m_OrthoSize;
+	}
+
+	private void DisableOtherPoints()
+	{
+		Material DisabledMaterial = Resources.Load<Material>("Materials/Disabled");
+
+		foreach (CameraPoint point in CameraPoints)
+		{
+			if (point == this)
+			{
+				continue;
+			}
+
+			point.GetComponent<Renderer>().material = DisabledMaterial;
+			point.GetComponent<BoxCollider>().enabled = false;
+		}
+	}
+
+	public static void EnableAllPoints()
+	{
+		Material EnabledMaterial = Resources.Load<Material>("Materials/Enabled");
+
+		foreach (CameraPoint point in CameraPoints)
+		{
+			point.GetComponent<Renderer>().material = EnabledMaterial;
+			point.GetComponent<BoxCollider>().enabled = true;
+		}
 	}
 }
