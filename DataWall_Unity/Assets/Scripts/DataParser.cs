@@ -57,7 +57,10 @@ public class DataParser : MonoBehaviour
 
 	public void CameraToDataView()
 	{
-		ClearStoredData();
+		if (FilterFlags.IsDirty)
+		{
+			ClearStoredData();
+		}
 
 		Instance.m_DataWindow.SetActive(true);
 		Instance.m_MapWindow.SetActive(false);
@@ -126,18 +129,20 @@ public class DataParser : MonoBehaviour
 
 		//TODO: Multi-category support
 
-		ClearStoredData();
-
 		FilterFlags.ApplyFilters();
+
+		ClearStoredData();
 
 		foreach (string numberFormat in Enum.GetNames(typeof(NumberFormat)))
 		{
 			string filePath = System.IO.Path.Combine(
-				"https://raw.githubusercontent.com/RGRoland/DataWall/gh-pages/Files/DataWall-Files/Raw/",
+				"https://raw.githubusercontent.com/RGRoland/DataWall/gh-pages/Files/DataWall-Files/DataMap/",
 				FilterFlags.CurrentFilters.Filter_Format.ToString() +
 				numberFormat +
 				FilterFlags.CurrentFilters.Filter_Legality.ToString() +
 				".csv");
+
+			Debug.Log("Filepath: " + filePath);
 
 			var www = Networking.UnityWebRequest.Get(filePath);
 
@@ -197,17 +202,14 @@ public class DataParser : MonoBehaviour
 
 	private static void ClearStoredData()
 	{
-		if (FilterFlags.IsDirty)
+		foreach (GameObject box in Instance.categoryBoxList)
 		{
-			foreach (GameObject box in Instance.categoryBoxList)
+			if (box != null)
 			{
-				if (box != null)
-				{
-					Destroy(box);
-				}
+				Destroy(box);
 			}
-
-			Instance.categoryBoxList.Clear();
 		}
+
+		Instance.categoryBoxList.Clear();
 	}
 }
