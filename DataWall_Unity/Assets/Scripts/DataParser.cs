@@ -1,51 +1,148 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Networking = UnityEngine.Networking;
 using Enums;
-using UnityEngine.UI;
 
+[RequireComponent(typeof(Camera))]
 public class DataParser : MonoBehaviour
 {
-	public const string categoryBox_AssetName = "Timeline Data Container";
+	private const string categoryBox_AssetName = "Timeline Data Container";
 
+	internal static DataParser Instance { get; set; }
+
+	[Header("UI Windows")]
 	[SerializeField]
-	private GameObject m_FiltersTab;
+	private GameObject m_MapWindow;
 	[SerializeField]
-	private Button m_ParserButton;
+	private GameObject m_DataWindow;
 	[SerializeField]
 	private GameObject m_ContentContainer;
 
+	[Header("Camera Defaults")]
+	[SerializeField]
+	private float m_DefaultOrthoSize = 5f;
+
+	[Header("Camera Movement Settings")]
+	[SerializeField]
+	private float m_OrthoZoomSpeed = 0.1f;
+	[SerializeField]
+	private float m_CameraMoveSpeed = 0.1f;
+
 	private List<GameObject> categoryBoxList = new List<GameObject>();
+	private Camera m_Camera;
 
 	private void Awake()
 	{
-		this.m_ParserButton.onClick.AddListener(() =>
+		Instance = this;
+
+		Instance.m_Camera = Instance.GetComponent<Camera>();
+
+		Instance.Test_ResetCamera_Hard();
+		Instance.CameraToMapView();
+	}
+
+	public void ResetCamera_Smooth()
+	{
+		UpdateCamera(Vector3.zero, Instance.m_DefaultOrthoSize);
+		CameraPoint.EnableAllPoints();
+	}
+
+	[ContextMenu("Reset Camera Position")]
+	private void Test_ResetCamera_Hard()
+	{
+		this.transform.position = Vector3.zero;
+		this.GetComponent<Camera>().orthographicSize = this.m_DefaultOrthoSize;
+	}
+
+	public void CameraToDataView()
+	{
+		if (FilterFlags.IsDirty)
 		{
-			StopCoroutine("ParseFileData");
-			StartCoroutine("ParseFileData");
-		});
+			ClearStoredData();
+		}
+
+		Instance.m_DataWindow.SetActive(true);
+		Instance.m_MapWindow.SetActive(false);
 	}
 
-	private void Start()
+	public void CameraToMapView()
 	{
-		Data_FilterFlags.Filter_State = StateName.Arizona;
+		Instance.m_MapWindow.SetActive(true);
+		Instance.m_DataWindow.SetActive(false);
+
+		Instance.ResetCamera_Smooth();
 	}
 
-	private System.Collections.IEnumerator ParseFileData()
+	internal static void UpdateCamera(Vector3 newPosition, float newOrthoSize)
 	{
-		Debug.Log(Time.time + ": PARSE");
+		Instance.StopCoroutine("UpdateCameraPosition");
+		Instance.StartCoroutine("UpdateCameraPosition", newPosition);
+
+		Instance.StopCoroutine("UpdateCameraOrthoSize");
+		Instance.StartCoroutine("UpdateCameraOrthoSize", newOrthoSize);
+	}
+
+	private System.Collections.IEnumerator UpdateCameraPosition(Vector3 newPosition)
+	{
+		while (true)
+		{
+			if (Instance.m_Camera.transform.position == newPosition)
+			{
+				yield break;
+			}
+
+			Instance.m_Camera.transform.position = Vector3
+				.Lerp(Instance.m_Camera.transform.position, newPosition, Instance.m_OrthoZoomSpeed);
+
+			yield return null;
+		}
+	}
+
+	private System.Collections.IEnumerator UpdateCameraOrthoSize(float newOrthoSize)
+	{
+		while (true)
+		{
+			if (Instance.m_Camera.orthographicSize == newOrthoSize)
+			{
+				yield break;
+			}
+
+			Instance.m_Camera.orthographicSize = Mathf
+				.Lerp(Instance.m_Camera.orthographicSize, newOrthoSize, Instance.m_CameraMoveSpeed);
+
+			yield return null;
+		}
+	}
+
+	public void ParseData()
+	{
+		Instance.StopCoroutine("UpdateData");
+		Instance.StartCoroutine("UpdateData");
+	}
+
+	private System.Collections.IEnumerator UpdateData()
+	{
+		Debug.Log(Time.time + ": PARSE START");
+
 		string[] result;
 
 		//TODO: Multi-category support
 
-		this.ClearStoredData();
+		FilterFlags.ApplyFilters();
 
-		foreach (string numberFormat in System.Enum.GetNames(typeof(NumberFormat)))
+		ClearStoredData();
+
+		foreach (string numberFormat in Enum.GetNames(typeof(NumberFormat)))
 		{
-			string filePath = System.IO.Path.Combine("https://raw.githubusercontent.com/RGRoland/DataWall/gh-pages/Files/DataWall-Files/Raw/",
-				Data_FilterFlags.Filter_Format.ToString() + numberFormat + Data_FilterFlags.Filter_Legality.ToString() + ".csv");
+			string filePath = System.IO.Path.Combine(
+				"https://raw.githubusercontent.com/RGRoland/DataWall/gh-pages/Files/DataWall-Files/DataMap/",
+				FilterFlags.CurrentFilters.Filter_Format.ToString() +
+				numberFormat +
+				FilterFlags.CurrentFilters.Filter_Legality.ToString() +
+				".csv");
 
-			Debug.Log(Time.time + ": Filepath = " + filePath);
+			Debug.Log("Filepath: " + filePath);
 
 			var www = Networking.UnityWebRequest.Get(filePath);
 
@@ -61,35 +158,37 @@ public class DataParser : MonoBehaviour
 			// Result now equals comma-separated string array - each element equals timeline data for each line (a state)
 			// > Sample Element: "1,2222,3,4444,55,666,77,888888,9999"
 
-			result = result[Data_FilterFlags.Filter_State.ToIndex()].Split(',');
+			result = result[FilterFlags.CurrentFilters.Filter_State.ToIndex()].Split(',');
 
 			Debug.Log(Time.time + ": Adding UI Elements.");
 
-			this.UI_AddCategoryBox(result, numberFormat);
+			UI_AddCategoryBox(result, numberFormat);
 
 			yield return null;
 		}
 
+		Debug.Log(Time.time + ": PARSE END");
+
 		yield break;
 	}
 
-	private void UI_AddCategoryBox(string[] result, string numberFormat)
+	private static void UI_AddCategoryBox(string[] result, string numberFormat)
 	{
-		StateDataPanel boxInfo = Instantiate(Resources.Load<GameObject>(categoryBox_AssetName), this.m_ContentContainer.transform)
+		StateDataPanel boxInfo = Instantiate(Resources.Load<GameObject>(categoryBox_AssetName), Instance.m_ContentContainer.transform)
 			.GetComponent<StateDataPanel>();
 
-		this.categoryBoxList.Add(boxInfo.gameObject);
+		Instance.categoryBoxList.Add(boxInfo.gameObject);
 
-		boxInfo.categoryLabel.text = Data_FilterFlags.Filter_Format.ToString() + ": " + numberFormat;
+		boxInfo.categoryLabel.text = FilterFlags.CurrentFilters.Filter_Format.ToString() + ": " + numberFormat;
 
-		int length = System.Enum.GetNames(typeof(DataYear)).Length;
+		int length = Enum.GetNames(typeof(DataYear)).Length;
 
 		for (int i = 0; i < length; i++)
 		{
-			switch ((NumberFormat)System.Enum.Parse(typeof(NumberFormat), numberFormat))
+			switch ((NumberFormat)Enum.Parse(typeof(NumberFormat), numberFormat))
 			{
 				case NumberFormat.Nominal:
-					boxInfo.stateDataList[i].text = result[i];
+					boxInfo.stateDataList[i].text = String.Format("{0:n0}", Int32.Parse(result[i]));
 					break;
 				case NumberFormat.Percentage:
 					boxInfo.stateDataList[i].text = result[i] + '%';
@@ -101,9 +200,9 @@ public class DataParser : MonoBehaviour
 		}
 	}
 
-	private void ClearStoredData()
+	private static void ClearStoredData()
 	{
-		foreach (GameObject box in this.categoryBoxList)
+		foreach (GameObject box in Instance.categoryBoxList)
 		{
 			if (box != null)
 			{
@@ -111,6 +210,6 @@ public class DataParser : MonoBehaviour
 			}
 		}
 
-		this.categoryBoxList.Clear();
+		Instance.categoryBoxList.Clear();
 	}
 }

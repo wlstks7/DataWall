@@ -5,7 +5,7 @@
 	[System.Flags]
 	public enum FormatType : byte
 	{
-		Population = 1 << 0
+		Total = 1 << 0
 	}
 
 	public static partial class CustomExtensions
@@ -15,10 +15,21 @@
 			switch (year)
 			{
 				case 0:
-					return FormatType.Population;
+					return FormatType.Total;
 				default:
 					UnityEngine.Debug.LogError("IndexToLegalityType() has failed.");
 					return 0;
+			}
+		}
+
+		public static int ToIndex(this FormatType filterType)
+		{
+			switch (filterType)
+			{
+				case FormatType.Total:
+					return 0;
+				default:
+					throw new System.ArgumentOutOfRangeException();
 			}
 		}
 	}
