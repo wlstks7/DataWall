@@ -4,7 +4,7 @@ This guide outlines the file format used for the DataMap data files as well as t
 ## Glossary
 __Data Region__
 * There are 11 total Data Regions:
-	1. Arizona
+	* Arizona
 	* California
 	* Florida
 	* Georgia
@@ -18,7 +18,7 @@ __Data Region__
 
 __Data Year__
 * There are 8 total Data Years:
-	1. 2005
+	* 2005
 	* 2006
 	* 2007
 	* 2008
