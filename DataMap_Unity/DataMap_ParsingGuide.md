@@ -197,9 +197,13 @@ After all the data is filtered, we just input the filtered data and the current 
 UI_AddCategoryBox(result, numberFormat);
 ```
 
-After all parses are complete, the results are displayed and navigable with the DataMap.
+After all parses are complete, the results are displayed and navigable within the DataMap.
 
 (The complete DataParser code used throughout this guide can be found [here][DataParser.cs].)
 
 [DataParser.cs]: https://github.com/RGRoland/DataWall/blob/gh-pages/DataWall_Unity/Assets/Scripts/DataParser.cs
 [UnityWebRequest API]: https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.html
+
+## Future Plans
+### Mask-driven (Multi-selection) filtering
+Currently, the DataMap only features single-selection filter options. This means that if you wanted to, for example, view the Total _and_ Growth you would need to have access to a multi-selection compatible filtering system. In a more technical viewpoint, this would require something called bitmasking. Without bitmasking, you can only calculate with one selection per filter type since that's the C# language default way of working with enums.
