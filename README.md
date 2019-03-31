@@ -5,15 +5,9 @@ DataWall: The Digital Border is an interactive web-based data visualization plat
 - DataMap mobile edition.
 
 ## Updates
-### DataMap 2
-- improve clarity of data being represented
-- various changes such as state selection via the map
-- minor performance improvements
+### DataMap 3
+- two map versions ("retro" and "minimal")
+- updated Text components to use TextMeshPro
+- disabled unused engine components
 
-### Update 1.0.0 "Release 1"
-- DataWall homepage.
-- DataMap update.
-- Mobile and desktop CSS fixes.
-- Code of conduct implemented.
-
-### D|W 1.0.2 . Robert Roland . Chase Moudry . Shelby Epley
+### D|W 1.0.3 . Robert Roland . Chase Moudry . Shelby Epley
