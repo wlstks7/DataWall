@@ -31,6 +31,22 @@ public class CameraPoint : MonoBehaviour
     [SerializeField]
     private Vector2 m_CameraOffset;
 
+    private void Start()
+    {
+        Material enabledMaterial;
+        // TODO: Change retro material names
+        if (DataParser.Instance.Theme_UI == Theme.Retro)
+        {
+            enabledMaterial = Resources.Load<Material>("Materials/Enabled");
+        }
+        else
+        {
+            enabledMaterial = Resources.Load<Material>("Materials/White");
+        }
+
+        this.GetComponent<Renderer>().material = enabledMaterial;
+    }
+
     private void OnEnable()
     {
         CameraPoints.Add(this);

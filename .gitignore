@@ -1,8 +1,6 @@
 DataMap_Unity/[Ll]ibrary/
 DataMap_Unity/[Tt]emp/
 DataMap_Unity/[Oo]bj/
-DataMap_Unity/[Bb]uild/
-DataMap_Unity/[Bb]uilds/
 DataMap_Unity/Assets/AssetStoreTools*
 
 # Visual Studio 2015 cache directory
@@ -32,3 +30,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+DataMap_Unity/Builds/Retro/live/index.html
+DataMap_Unity/Builds/Minimalistic/live/index.html
