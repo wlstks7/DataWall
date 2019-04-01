@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Networking = UnityEngine.Networking;
 using Enums;
 
@@ -12,6 +11,13 @@ public class DataParser : MonoBehaviour
 
     internal static DataParser Instance { get; set; }
 
+    public Theme Theme_UI = Theme.Minimalistic;
+
+    [SerializeField]
+    private GameObject m_RetroIntroWindow;
+    [SerializeField]
+    private GameObject m_MinimalisticIntroWindow;
+
     [Header("UI Windows")]
     [SerializeField]
     private GameObject m_MapWindow;
@@ -19,14 +25,6 @@ public class DataParser : MonoBehaviour
     private GameObject m_DataWindow;
     [SerializeField]
     private GameObject m_ContentContainer;
-
-    [Header("Intro Window")]
-    [SerializeField]
-    private Image m_TitleText;
-    [SerializeField]
-    private Image m_DescriptionText;
-    [SerializeField]
-    private float m_FadeRate = 5f;
 
     [Header("Camera Defaults")]
     [SerializeField]
@@ -55,63 +53,8 @@ public class DataParser : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine("FadeIntroWindow");
-    }
-
-    private Color tempColor;
-    private float alphaDiff;
-    private float targetAlpha;
-
-    private System.Collections.IEnumerator FadeIntroWindow()
-    {
-        this.m_TitleText.enabled = true;
-        this.m_DescriptionText.enabled = false;
-
-        yield return new WaitForSecondsRealtime(3.0f);
-
-        // Fade out title
-        targetAlpha = 0f;
-        while (true)
-        {
-            tempColor = this.m_TitleText.color;
-            alphaDiff = Mathf.Abs(tempColor.a - targetAlpha);
-            if (alphaDiff > 0.0001f)
-            {
-                tempColor.a = Mathf.Lerp(tempColor.a, targetAlpha, this.m_FadeRate * Time.deltaTime);
-                this.m_TitleText.color = tempColor;
-            }
-            else
-            {
-                break;
-            }
-            yield return null;
-        }
-
-        Debug.Log("Phase2");
-
-        this.m_DescriptionText.enabled = true;
-        tempColor = this.m_DescriptionText.color;
-        tempColor.a = 0;
-        this.m_DescriptionText.color = tempColor;
-
-        // Fade in description
-        targetAlpha = 1f;
-        while (true)
-        {
-            tempColor = this.m_DescriptionText.color;
-            alphaDiff = Mathf.Abs(tempColor.a - targetAlpha);
-            if (alphaDiff > 0.0001f)
-            {
-                tempColor.a = Mathf.Lerp(tempColor.a, targetAlpha, this.m_FadeRate * Time.deltaTime);
-                this.m_DescriptionText.color = tempColor;
-            }
-            else
-            {
-                break;
-            }
-            yield return null;
-        }
-        Debug.Log("Exiting Coroutine");
+        this.m_MinimalisticIntroWindow.SetActive(this.Theme_UI == Theme.Minimalistic);
+        this.m_RetroIntroWindow.SetActive(this.Theme_UI == Theme.Retro);
     }
 
     public void ResetCamera_Smooth()
@@ -284,4 +227,10 @@ public class DataParser : MonoBehaviour
 
         Instance.categoryBoxList.Clear();
     }
+}
+
+public enum Theme
+{
+    Minimalistic,
+    Retro,
 }

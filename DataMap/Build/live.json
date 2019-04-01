@@ -1,14 +1,13 @@
 {
-"companyName": "Wulf.Design",
-"productName": "DataWall",
+"companyName": "kiroku.host",
+"productName": "DataMap",
 "dataUrl": "live.data.unityweb",
-"asmCodeUrl": "live.asm.code.unityweb",
-"asmMemoryUrl": "live.asm.memory.unityweb",
-"asmFrameworkUrl": "live.asm.framework.unityweb",
+"wasmCodeUrl": "live.wasm.code.unityweb",
+"wasmFrameworkUrl": "live.wasm.framework.unityweb",
 "TOTAL_MEMORY": 67108864,
 "graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
 "splashScreenStyle": "Dark",
 "backgroundColor": "#231F20",
-"cacheControl": {"dataUrl": "must-revalidate"}
+"cacheControl": {"default": "must-revalidate"}
 }
