@@ -194,6 +194,21 @@ body
 	text-align: justify;
 }
 /*
+ * Text 50
+ * Text and images that take up 50% width.
+ */
+.text-area-50
+{
+	float: left;
+	width: 50%;
+}
+.text-area-50 img
+{
+	margin: 0 auto 10px auto;
+	width: 100%;
+	display: block;
+}
+/*
  * Line Graph 50
  * Line graphs that take up half of the width.
  * Two line graph 50's are able to be side by side.

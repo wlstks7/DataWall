@@ -10,4 +10,4 @@ DataWall: The Digital Border is an interactive web-based data visualization plat
 - updated Text components to use TextMeshPro
 - disabled unused engine components
 
-### D|W 1.0.3 . Robert Roland . Chase Moudry . Shelby Epley
+### D|W 1.3.3 . Robert Roland . Chase Moudry . Shelby Epley
